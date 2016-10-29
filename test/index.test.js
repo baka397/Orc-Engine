@@ -1,3 +1,4 @@
+//Orc Base Test
 'use strict';
 const should = require('should');
 const Orc=require('../index');
@@ -13,24 +14,14 @@ describe('Orc create', ()=>{
             if(orcClient.redis) done()
             else done('Orc failed to create Redis client');
         });
-        it('Set key', done=>{
-            orcClient.redis.set('Orc:test', 'test key').then(result=>{
-                done();
-            }).catch(err=>done);
+        it('Set key', ()=>{
+            return orcClient.redis.set('Orc:test', 'test key')
         });
-        it('Get key',done=>{
-            orcClient.redis.get('Orc:test').then(result=>{
-                if(result==='test key'){
-                    done();
-                }else{
-                    done('Wrong key');
-                }
-            }).catch(err=>done);
+        it('Get key',()=>{
+            return orcClient.redis.get('Orc:test');
         })
-        it('Flush',done=>{
-            orcClient.redis.flushdb().then(result=>{
-                done();
-            }).catch(err=>done);
+        it('Flush',()=>{
+            return orcClient.redis.flushdb();
         })
     })
     describe('Config Test', ()=>{
