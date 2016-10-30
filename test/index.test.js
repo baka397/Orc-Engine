@@ -33,6 +33,18 @@ describe('Orc create', ()=>{
             orcClient.config.should.have.property('resultCache', 1);
         })
     })
+    describe('Test redis config', ()=>{
+        it('Create new Orc client', done=>{
+            let orcClient2=new Orc({
+                redis:{
+                    port: 6379,
+                    host: '127.0.0.1'
+                }
+            })
+            if(orcClient2.redis) done()
+            else done('Orc failed to create Redis client');
+        })
+    })
 })
 
 middleware();
