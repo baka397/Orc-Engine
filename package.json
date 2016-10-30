@@ -4,7 +4,8 @@
   "description": "Light-weight recommended engine for Node.js - backed by Redis",
   "main": "index.js",
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha --timeout 10000"
+    "test": "node ./node_modules/mocha/bin/mocha --timeout 10000",
+    "test-cov": "node ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --timeout 10000"
   },
   "repository": {
     "type": "git",
@@ -20,13 +21,14 @@
     "url": "https://github.com/baka397/Orc-Engine/issues"
   },
   "homepage": "https://orce.io",
-  "engines" : {
-    "node" : ">=4.0.0"
+  "engines": {
+    "node": ">=4.0.0"
   },
   "dependencies": {
     "ioredis": "^2.4.0"
   },
   "devDependencies": {
+    "istanbul": "^0.4.5",
     "mocha": "^3.1.2",
     "nock": "^9.0.2",
     "should": "^11.1.1"
