@@ -11,4 +11,4 @@ node_js:
 services:
   - redis-server
 
-script: npm test
+script: npm run test-cov
