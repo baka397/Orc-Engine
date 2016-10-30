@@ -20,3 +20,6 @@ npm test
 
 ##Changelog
 版本更新说明请关注[releases](https://github.com/baka397/Orc-Engine/releases)
+
+##License
+[MIT协议](https://opensource.org/licenses/MIT)
