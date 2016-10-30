@@ -3,11 +3,14 @@ Orc Engine
 
 ##当前版本
 [![build status][travis-image]][travis-url]
+[![codecov.io][codecov-image]][codecov-url]
 [![David deps][david-image]][david-url]
 [![node version][node-image]][node-url]
 
 [travis-url]: https://travis-ci.org/baka397/Orc-Engine
 [travis-image]: https://img.shields.io/travis/baka397/Orc-Engine/develop.svg?style=flat-square
+[codecov-image]: https://img.shields.io/codecov/c/github/baka397/Orc-Engine/develop.svg?style=flat-square
+[codecov-url]: https://codecov.io/github/baka397/Orc-Engine?branch=develop
 [david-image]: https://img.shields.io/david/baka397/Orc-Engine.svg?style=flat-square
 [david-url]: https://david-dm.org/baka397/Orc-Engine
 [node-image]: https://img.shields.io/badge/node.js-%3E=_4.2-green.svg?style=flat-square
