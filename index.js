@@ -23,6 +23,6 @@ Orc.prototype._init=function(option){
         ranking:[]
     }
 }
-//Init middleware methods
+//Apply methods
 tool.applyMethods(Orc,middleware);
 module.exports = Orc;
