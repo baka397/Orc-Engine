@@ -1,8 +1,10 @@
 //Orc Middleware Test
 'use strict';
-const base=require('./base'); //Middleware Task
-module.exports=function(){
+const base=require('./base'); //Middleware Base function
+const use=require('./use'); //Middleware Use
+module.exports=function(orcClient){
     describe('Middleware',()=>{
-        base()
+        base(orcClient);
+        use(orcClient);
     })
 }

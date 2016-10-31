@@ -47,4 +47,4 @@ describe('Orc create', ()=>{
     })
 })
 
-middleware();
+middleware(orcClient);

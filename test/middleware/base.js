@@ -3,7 +3,7 @@
 const should = require('should');
 const middlewareTask=require('../../lib/middlewares/task'); //Middleware Task
 
-module.exports=function(){
+module.exports=function(orcClient){
     describe('Base function', ()=>{
         describe('Middleware Task Promise Object', ()=>{
             it('Create without middleware', done=>{
