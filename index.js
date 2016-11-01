@@ -2,19 +2,28 @@
 const tool = require('./lib/common/tool');
 const redis = require('./lib/common/redis');
 const middleware = require('./lib/middlewares/');
-function Orc(option){
-    option=option||{};
-    this._init(option);
+function Orc(config){
+    config=config||{};
+    this._init(config);
 }
 //init Orc settings
-Orc.prototype._init=function(option){
-    const baseOption={
+Orc.prototype._init=function(config){
+    const baseConfig={
         name:'orc', //Instance name,for mulit Instance
         rankingCache:1, //"Dimension Ranking System" cache time(Day)
         resultCache:1 //"Recommender Module" result cache time(Day)
     };
-    this.config=Object.assign({},baseOption,option);
-    if(option.redis) this.config.redis=Object.assign({},option.redis)
+    if(config.name&&!tool.testStringArgument(config.name,5,20)){
+        throw new Error('The config.name must be 5-20 words/number');
+    }
+    if(config.rankingCache&&!parseFloat(config.rankingCache)>0){
+        throw new Error('The config.rankingCache must be right number');
+    }
+    if(config.resultCache&&!parseFloat(config.resultCache)>0){
+        throw new Error('The config.resultCache must be right number');
+    }
+    this.config=Object.assign({},baseConfig,config);
+    if(config.redis) this.config.redis=Object.assign({},config.redis)
     //Init redis client
     this.redis=redis(this.config.redis);
     //Add middleware function list
@@ -22,6 +31,7 @@ Orc.prototype._init=function(option){
         profile:[],
         ranking:[]
     }
+    this._module={}
 }
 //Apply methods
 tool.applyMethods(Orc,middleware);

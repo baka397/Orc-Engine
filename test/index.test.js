@@ -3,7 +3,8 @@
 const should = require('should');
 const Orc = require('../index');
 //Load test case
-const middleware = require('./middleware/');
+const middlewareTest = require('./middleware/');
+const moduleTest = require('./module/');
 
 let orcClient=new Orc();
 describe('Orc create', ()=>{
@@ -45,6 +46,39 @@ describe('Orc create', ()=>{
             else done('Orc failed to create Redis client');
         })
     })
+    describe('Config Error', ()=>{
+        it('Name', done=>{
+            try{
+                new Orc({
+                    name:'test name'
+                })
+                done('Should not over here');
+            }catch(e){
+                done()
+            }
+        })
+        it('Ranking Cache Time', done=>{
+            try{
+                new Orc({
+                    rankingCache:'test'
+                })
+                done('Should not over here');
+            }catch(e){
+                done()
+            }
+        })
+        it('Result Cache Time', done=>{
+            try{
+                new Orc({
+                    resultCache:'test'
+                })
+                done('Should not over here');
+            }catch(e){
+                done()
+            }
+        })
+    })
 })
 
-middleware(orcClient);
+middlewareTest(orcClient);
+moduleTest(orcClient);
