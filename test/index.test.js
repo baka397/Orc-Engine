@@ -19,9 +19,6 @@ describe('Orc create', ()=>{
         it('Get key',()=>{
             return orcClient.redis.get('Orc:test');
         })
-        it('Flush',()=>{
-            return orcClient.redis.flushdb();
-        })
     })
     describe('Config Test', ()=>{
         it('Name', ()=>{
@@ -82,3 +79,9 @@ describe('Orc create', ()=>{
 
 middlewareTest(orcClient);
 moduleTest(orcClient);
+
+describe('Orc test data clear', ()=>{
+    it('Flush',()=>{
+        return orcClient.redis.flushdb();
+    })
+})
