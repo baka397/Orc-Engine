@@ -24,6 +24,16 @@ module.exports=function(orcClient){
             it('Get redis Client', done=>{
                 done(resultModule.getRedisClient()!==orcClient.redis);
             })
+            it('Get Middlewares', done=>{
+                let middlewareArray=resultModule.getMiddlewares();
+                done(!(Array.isArray(middlewareArray)&&middlewareArray.length===0));
+            })
+            it('Emit module message', done=>{
+                orcClient.on('info',(info)=>{
+                    done(info!=='test info');
+                })
+                resultModule.emit('info','test info');
+            });
             it('Wrong module name', done=>{
                 try{
                     let result=createModule(orcClient,'test Module',testConstructor);

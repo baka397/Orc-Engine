@@ -19,6 +19,21 @@ describe('Orc create', ()=>{
         it('Get key',()=>{
             return orcClient.redis.get('Orc:test');
         })
+        it('Wrong redis client', done=>{
+            let orcClient2=new Orc({
+                redis:{
+                    port: 6379,
+                    host: '127.0.0.1'
+                }
+            })
+            orcClient2.redis.on('ready',()=>{
+                done();
+            })
+        })
+        it('Another default redis client', done=>{
+            let orcClient3=new Orc();
+            done(orcClient3.redis!==orcClient.redis);
+        });
     })
     describe('Config Test', ()=>{
         it('Name', ()=>{
@@ -29,18 +44,6 @@ describe('Orc create', ()=>{
         })
         it('Result Cache Time', ()=>{
             orcClient.config.should.have.property('resultCache', 1);
-        })
-    })
-    describe('Test redis config', ()=>{
-        it('Create new Orc client', done=>{
-            let orcClient2=new Orc({
-                redis:{
-                    port: 6379,
-                    host: '127.0.0.1'
-                }
-            })
-            if(orcClient2.redis) done()
-            else done('Orc failed to create Redis client');
         })
     })
     describe('Config Error', ()=>{

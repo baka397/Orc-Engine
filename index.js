@@ -1,11 +1,15 @@
 'use strict';
+const util = require('util');
+const EventEmitter = require('events').EventEmitter;
 const tool = require('./lib/common/tool');
 const redis = require('./lib/common/redis');
 const middleware = require('./lib/middlewares/');
 function Orc(config){
     config=config||{};
+    EventEmitter.call(this);
     this._init(config);
 }
+util.inherits(Orc, EventEmitter);
 //init Orc settings
 Orc.prototype._init=function(config){
     const baseConfig={
@@ -31,7 +35,7 @@ Orc.prototype._init=function(config){
         profile:[],
         ranking:[]
     }
-    this._module={}
+    this._module={};
 }
 //Apply methods
 tool.applyMethods(Orc,middleware);

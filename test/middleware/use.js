@@ -26,7 +26,7 @@ module.exports=function(orcClient){
                     orcClient.use('pro test',testFunc2);
                     done('Should not over here');
                 }catch(e){
-                    done()
+                    done();
                 }
             })
             it('Use wrong middleware function',done=>{
@@ -34,8 +34,12 @@ module.exports=function(orcClient){
                     orcClient.use('pro test',null);
                     done('Should not over here');
                 }catch(e){
-                    done()
+                    done();
                 }
+            })
+            it('Clear middlewares', done=>{
+                orcClient._middleware={};
+                done();
             })
         })
     })
