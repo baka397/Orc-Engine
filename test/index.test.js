@@ -19,16 +19,14 @@ describe('Orc create', ()=>{
         it('Get key',()=>{
             return orcClient.redis.get('Orc:test');
         })
-        it('Wrong redis client', done=>{
+        it('New config redis client', done=>{
             let orcClient2=new Orc({
                 redis:{
                     port: 6379,
                     host: '127.0.0.1'
                 }
             })
-            orcClient2.redis.on('ready',()=>{
-                done();
-            })
+            done(orcClient2.redis===orcClient.redis);
         })
         it('Another default redis client', done=>{
             let orcClient3=new Orc();
