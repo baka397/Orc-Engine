@@ -3,7 +3,8 @@ const util = require('util');
 const EventEmitter = require('events').EventEmitter;
 const tool = require('./lib/common/tool');
 const redis = require('./lib/common/redis');
-const middleware = require('./lib/middlewares/');
+const middlewareFuncs = require('./lib/middlewares/');
+const moduleFuncs = require('./lib/module/');
 function Orc(config){
     config=config||{};
     EventEmitter.call(this);
@@ -38,5 +39,5 @@ Orc.prototype._init=function(config){
     this._module={};
 }
 //Apply methods
-tool.applyMethods(Orc,middleware);
+tool.applyMethods(Orc,middlewareFuncs,moduleFuncs);
 module.exports = Orc;
