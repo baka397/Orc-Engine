@@ -16,7 +16,10 @@
     "recommend"
   ],
   "author": "bakajinsei",
-  "license": "ISC",
+  "license": {
+    "type" : "MIT",
+    "url" : "https://opensource.org/licenses/MIT"
+  },
   "bugs": {
     "url": "https://github.com/baka397/Orc-Engine/issues"
   },
