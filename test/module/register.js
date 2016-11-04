@@ -7,7 +7,7 @@ function testConstructor(){
 module.exports=function(orcClient){
     describe('Register module', ()=>{
         it('Register', done=>{
-            orcClient.regModule('testModule',testConstructor);
+            orcClient.regModule([],'testModule',testConstructor);
             done(!orcClient.getTestModule);
         })
         it('Module props', done=>{
@@ -16,9 +16,10 @@ module.exports=function(orcClient){
         })
         it('Register with Wrong Module Name', done=>{
             orcClient.once('error',(err)=>{
+                console.log(err);
                 done(!err);
             })
-            orcClient.regModule('test module',testConstructor);
+            orcClient.regModule([],'test module',testConstructor);
         })
     })
 }

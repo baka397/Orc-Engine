@@ -26,6 +26,7 @@ module.exports=function(orcClient){
                     orcClient.use('pro test',testFunc2);
                     done('Should not over here');
                 }catch(e){
+                    console.log(e);
                     done();
                 }
             })
@@ -34,6 +35,7 @@ module.exports=function(orcClient){
                     orcClient.use('pro test',null);
                     done('Should not over here');
                 }catch(e){
+                    console.log(e);
                     done();
                 }
             })
