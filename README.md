@@ -17,8 +17,12 @@ Orc Engine
 [node-url]: http://nodejs.org/download/
 
 ##介绍
-Orc Engine是一个基于[redis](http://redis.io/)的"轻量级、高扩展性、快速"推荐引擎.
+Orc Engine是一个基于[redis](http://redis.io/)的"轻量级、高扩展性、快速"推荐引擎. 
 通过Orc你可以快速创建基于用户行为的内容推荐系统.
+
+#特点
+1. 数据中间件
+2. 自定义模块
 
 ##安装条件
 ```
