@@ -21,6 +21,7 @@ describe('Orc create', ()=>{
         })
         it('New config redis client', done=>{
             let orcClient2=new Orc({
+                name:'orc2',
                 redis:{
                     port: 6379,
                     host: '127.0.0.1'
@@ -29,7 +30,9 @@ describe('Orc create', ()=>{
             done(orcClient2.redis===orcClient.redis);
         })
         it('Another default redis client', done=>{
-            let orcClient3=new Orc();
+            let orcClient3=new Orc({
+                name:'orc3',
+            });
             done(orcClient3.redis!==orcClient.redis);
         });
     })

@@ -1,5 +1,6 @@
 //Orc Middleware Test
 'use strict';
+const tool = require('../tool');
 const should = require('should');
 const createModule=require('../../lib/module/base').create; //Middleware Task
 const clearModules=require('../../lib/module/base').clear; //Middleware Task
@@ -7,25 +8,6 @@ function testConstructor(){
     this.option='test';
 }
 let resultModule;
-function isEmpty(obj) {
-    // null and undefined are "empty"
-    if (obj == null) return true;
-    // Assume if it has a length property with a non-zero value
-    // that that property is correct.
-    if (obj.length > 0)    return false;
-    if (obj.length === 0)  return true;
-    // If it isn't an object at this point
-    // it is empty, but it can't be anything *but* empty
-    // Is it empty?  Depends on your application.
-    if (typeof obj !== "object") return true;
-    // Otherwise, does it have any properties of its own?
-    // Note that this doesn't handle
-    // toString and valueOf enumeration bugs in IE < 9
-    for (var key in obj) {
-        if (hasOwnProperty.call(obj, key)) return false;
-    }
-    return true;
-}
 module.exports=function(orcClient){
     describe('Base function', ()=>{
         describe('Create a module', ()=>{
@@ -33,10 +15,6 @@ module.exports=function(orcClient){
                 resultModule=createModule(orcClient,[],'testModule',testConstructor);
                 // done(!(resultModule.option==='test'&&resultModule.orcClient===orcClient&&resultModule.name==='testModule'));
                 done();
-            })
-            it('Create same module', done=>{
-                let result=createModule(orcClient,[],'testModule',testConstructor);
-                done(!(result===resultModule));
             })
             it('Get redis key', done=>{
                 done(resultModule.getRedisKey('test')!=='orc:testModule:test');
@@ -46,7 +24,7 @@ module.exports=function(orcClient){
             })
             it('Get Middlewares', done=>{
                 let middlewareArray=resultModule.getMiddlewares();
-                done(!(Array.isArray(middlewareArray)&&middlewareArray.length===0));
+                done(!middlewareArray);
             })
             it('Emit module message', done=>{
                 orcClient.on('info',(info)=>{
@@ -58,13 +36,22 @@ module.exports=function(orcClient){
                 let testModule2=createModule(orcClient,['testModule'],'testOtherModule',testConstructor);
                 done();
             })
+            it('Create same module', done=>{
+                try{
+                    let result=createModule(orcClient,[],'testModule',testConstructor);
+                    done('Should not over here');
+                }catch(e){
+                    done()
+                    console.log('message:',e.message);
+                }
+            })
             it('Wrong module name', done=>{
                 try{
                     let result=createModule(orcClient,[],'test Module',testConstructor);
                     done('Should not over here');
                 }catch(e){
-                    console.log(e);
                     done()
+                    console.log('message:',e.message);
                 }
             })
             it('Wrong depend name', done=>{
@@ -72,8 +59,8 @@ module.exports=function(orcClient){
                     let result=createModule(orcClient,['test name'],'testModule3',testConstructor);
                     done('Should not over here');
                 }catch(e){
-                    console.log(e);
                     done()
+                    console.log('message:',e.message);
                 }
             })
             it('Not exsit depend name', done=>{
@@ -81,12 +68,12 @@ module.exports=function(orcClient){
                     let result=createModule(orcClient,['testModuleInfo'],'testModule3',testConstructor);
                     done('Should not over here');
                 }catch(e){
-                    console.log(e);
                     done()
+                    console.log('message:',e.message);
                 }
             })
             it('Clear', done=>{
-                done(!isEmpty(clearModules()));
+                done(clearModules().size!==0);
             })
         })
     })

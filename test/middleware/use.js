@@ -9,13 +9,12 @@ module.exports=function(orcClient){
             })
             it('Use middleware', done=>{
                 let testFunc=function(datas,next){
-                    console.log(datas);
                     next();
                 }
                 orcClient.use('profile',testFunc);//profile
                 orcClient.use('ranking',testFunc);//ranking
                 orcClient.use('testRec',testFunc);//Test Rec
-                done(!(orcClient._middleware.profile[0]===testFunc&&orcClient._middleware.ranking[0]===testFunc&&orcClient._middleware.testRec[0]===testFunc))
+                done(!(orcClient._middleware.profile[1]===testFunc&&orcClient._middleware.ranking[0]===testFunc&&orcClient._middleware.testRec[0]===testFunc))
             })
             it('Use wrong middleware name',done=>{
                 let testFunc2=function(datas,next){
@@ -26,8 +25,8 @@ module.exports=function(orcClient){
                     orcClient.use('pro test',testFunc2);
                     done('Should not over here');
                 }catch(e){
-                    console.log(e);
                     done();
+                    console.log('message:',e.message);
                 }
             })
             it('Use wrong middleware function',done=>{
@@ -35,13 +34,9 @@ module.exports=function(orcClient){
                     orcClient.use('pro test',null);
                     done('Should not over here');
                 }catch(e){
-                    console.log(e);
                     done();
+                    console.log('message:',e.message);
                 }
-            })
-            it('Clear middlewares', done=>{
-                orcClient._middleware={};
-                done();
             })
         })
     })

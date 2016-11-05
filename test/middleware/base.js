@@ -1,7 +1,7 @@
 //Orc Middleware Test
 'use strict';
 const should = require('should');
-const middlewareTask=require('../../lib/middlewares/base').task; //Middleware Task
+const middlewareTask=require('../../lib/middleware/base').task; //Middleware Task
 
 module.exports=function(orcClient){
     describe('Base function', ()=>{

@@ -1,6 +1,8 @@
 //Orc Middleware Test
 'use strict';
+const tool = require('../tool');
 const should = require('should');
+const clearModules=require('../../lib/module/base').clear; //Middleware Task
 function testConstructor(){
     this.option='test';
 }
@@ -15,9 +17,9 @@ module.exports=function(orcClient){
             done(!(testModule.option==='test'&&testModule.name==='testModule'&&testModule.orcClient===orcClient));
         })
         it('Register with Wrong Module Name', done=>{
-            orcClient.once('error',(err)=>{
-                console.log(err);
-                done(!err);
+            orcClient.once('error',(e)=>{
+                done(!e);
+                console.log('message:',e.message);
             })
             orcClient.regModule([],'test module',testConstructor);
         })
