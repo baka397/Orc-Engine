@@ -1,20 +1,24 @@
 //Orc Middleware Test
 'use strict';
 const should = require('should');
+const Orc = require('../../index');
 module.exports=function(orcClient){
+    let orcTestMiddleware=new Orc({
+        name:'orcTestMiddleware'
+    });
     describe('Use method', ()=>{
         describe('Middleware Task Promise Object', ()=>{
             it('Default middleware list', done=>{
-                done(!(Array.isArray(orcClient._middleware.profile)&&Array.isArray(orcClient._middleware.ranking)))
+                done(!(Array.isArray(orcTestMiddleware._middleware.profile)&&Array.isArray(orcTestMiddleware._middleware.ranking)))
             })
             it('Use middleware', done=>{
                 let testFunc=function(datas,next){
                     next();
                 }
-                orcClient.use('profile',testFunc);//profile
-                orcClient.use('ranking',testFunc);//ranking
-                orcClient.use('testRec',testFunc);//Test Rec
-                done(!(orcClient._middleware.profile[1]===testFunc&&orcClient._middleware.ranking[0]===testFunc&&orcClient._middleware.testRec[0]===testFunc))
+                orcTestMiddleware.use('profile',testFunc);//profile
+                orcTestMiddleware.use('ranking',testFunc);//ranking
+                orcTestMiddleware.use('testRec',testFunc);//Test Rec
+                done(!(orcTestMiddleware._middleware.profile[1]===testFunc&&orcTestMiddleware._middleware.ranking[0]===testFunc&&orcTestMiddleware._middleware.testRec[0]===testFunc))
             })
             it('Use wrong middleware name',done=>{
                 let testFunc2=function(datas,next){
@@ -22,7 +26,7 @@ module.exports=function(orcClient){
                     next();
                 }
                 try{
-                    orcClient.use('pro test',testFunc2);
+                    orcTestMiddleware.use('pro test',testFunc2);
                     done('Should not over here');
                 }catch(e){
                     done();
@@ -31,7 +35,7 @@ module.exports=function(orcClient){
             })
             it('Use wrong middleware function',done=>{
                 try{
-                    orcClient.use('pro test',null);
+                    orcTestMiddleware.use('pro test',null);
                     done('Should not over here');
                 }catch(e){
                     done();
