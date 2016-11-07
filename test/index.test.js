@@ -40,38 +40,12 @@ describe('Orc create', ()=>{
         it('Name', ()=>{
             orcClient.config.should.have.property('name', 'orc');
         })
-        it('Ranking Cache Time', ()=>{
-            orcClient.config.should.have.property('rankingCache', 1);
-        })
-        it('Result Cache Time', ()=>{
-            orcClient.config.should.have.property('resultCache', 1);
-        })
     })
     describe('Config Error', ()=>{
         it('Name', done=>{
             try{
                 new Orc({
                     name:'test name'
-                })
-                done('Should not over here');
-            }catch(e){
-                done()
-            }
-        })
-        it('Ranking Cache Time', done=>{
-            try{
-                new Orc({
-                    rankingCache:'test'
-                })
-                done('Should not over here');
-            }catch(e){
-                done()
-            }
-        })
-        it('Result Cache Time', done=>{
-            try{
-                new Orc({
-                    resultCache:'test'
                 })
                 done('Should not over here');
             }catch(e){

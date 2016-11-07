@@ -15,18 +15,10 @@ util.inherits(Orc, EventEmitter);
 //init Orc settings
 Orc.prototype._init=function(config){
     const baseConfig={
-        name:'orc', //Instance name,for mulit Instance
-        rankingCache:1, //"Dimension Ranking System" cache time(Day)
-        resultCache:1 //"Recommender Module" result cache time(Day)
+        name:'orc' //Instance name,for mulit Instance
     };
     if(config.name&&!tool.testStringArgument(config.name,3,20)){
         throw new Error('The config.name must be 3-20 words/number');
-    }
-    if(config.rankingCache&&!parseFloat(config.rankingCache)>0){
-        throw new Error('The config.rankingCache must be right number');
-    }
-    if(config.resultCache&&!parseFloat(config.resultCache)>0){
-        throw new Error('The config.resultCache must be right number');
     }
     this.config=Object.assign({},baseConfig,config);
     if(config.redis) this.config.redis=Object.assign({},config.redis)
