@@ -68,7 +68,7 @@ module.exports=function(orcClient){
             })
             it('Get Module', done=>{
                 let testModule=testModule2.getDependModule('testModule');
-                done(testModule.option);
+                done(testModule!==resultModule);
             })
             it('Create same module', done=>{
                 try{
