@@ -1,15 +1,15 @@
-//Orc Profile Module Test
+//Orc Item Module Test
 'use strict';
 const should = require('should');
 module.exports=function(orcClient){
-    let profile=orcClient.getProfile;
-    describe('Profile module', ()=>{
+    let item=orcClient.getItem;
+    describe('Item module', ()=>{
         it('Set/Update', done=>{
-            profile.update([
+            item.update([
             {
-                userId:1,
                 itemId:1,
-                point:3.5
+                dId:1,
+                point:0.5
             }
             ]).then(result=>{
                 done();
@@ -18,21 +18,21 @@ module.exports=function(orcClient){
             })
         })
         it('Mulit set/update', done=>{
-            profile.update([
+            item.update([
             {
-                userId:1,
                 itemId:1,
+                dId:1,
+                point:-1.5
+            },
+            {
+                itemId:1,
+                dId:2,
                 point:3
             },
             {
-                userId:1,
-                itemId:2,
-                point:-1
-            },
-            {
-                userId:1,
-                itemId:3,
-                point:10
+                itemId:1,
+                dId:3,
+                point:4
             }
             ]).then(result=>{
                 done();
@@ -40,47 +40,47 @@ module.exports=function(orcClient){
                 done(e);
             })
         })
-        it('Get', done=>{
-            profile.get(1).then(result=>{
-                done(!(parseInt(result[0])===2&&parseFloat(result[1])===-1&&parseInt(result[2])===1&&parseFloat(result[3])===6.5&&parseInt(result[4])===3&&parseFloat(result[5])===10));
+        it('Get item', done=>{
+            item.getItem(1).then(result=>{
+                done(!(parseInt(result[0])===1&&parseFloat(result[1])===-1&&parseInt(result[2])===2&&parseFloat(result[3])===3&&parseInt(result[4])===3&&parseFloat(result[5])===4));
             }).catch(e=>{
                 done(e);
             })
         })
-        it('Remove', done=>{
-            profile.remove(1,2,3).then(result=>{
-                done(parseInt(result)!==2);
+        it('Get dimension', done=>{
+            item.getDimension(1).then(result=>{
+                done(!(parseInt(result[0])===1&&parseFloat(result[1])===-1));
             }).catch(e=>{
                 done(e);
             })
         })
-        it('Get new Data', done=>{
-            profile.get(1).then(result=>{
-                done(!(parseInt(result[0])===1&&parseFloat(result[1])===6.5));
+        it('Remove item dimension', done=>{
+            item.removeItemDimension(1,1).then(result=>{
+                done(!(parseInt(result[0][1])===1&&parseInt(result[1][1])===1));
             }).catch(e=>{
                 done(e);
             })
         })
-        it('Clear', done=>{
-            profile.clear(1).then(result=>{
-                done(parseInt(result)!==1);
+        it('Get new item', done=>{
+            item.getItem(1).then(result=>{
+                done(!(parseInt(result[0])===2&&parseFloat(result[1])===3&&parseInt(result[2])===3&&parseFloat(result[3])===4));
             }).catch(e=>{
                 done(e);
             })
         })
-        it('Get clear Data', done=>{
-            profile.get(1).then(result=>{
+        it('Get new dimension', done=>{
+            item.getDimension(1).then(result=>{
                 done(result.length!==0);
             }).catch(e=>{
                 done(e);
             })
         })
         it('Set/Update wrong type', done=>{
-            profile.update(
+            item.update(
             {
-                userId:1,
                 itemId:1,
-                point:3.5
+                dId:1,
+                point:0.5
             }
             ).then(result=>{
                 done('Should not over here');
@@ -90,7 +90,7 @@ module.exports=function(orcClient){
             })
         })
         it('Set/Update empty value', done=>{
-            profile.update([]).then(result=>{
+            item.update([]).then(result=>{
                 done('Should not over here');
             }).catch(e=>{
                 done(!e);
@@ -98,9 +98,9 @@ module.exports=function(orcClient){
             })
         })
         it('Set/Update wrong value', done=>{
-            profile.update([{
-                userId:1,
+            item.update([{
                 itemId:1,
+                dId:1,
                 point:'test'
             }]).then(result=>{
                 done('Should not over here');
@@ -110,23 +110,23 @@ module.exports=function(orcClient){
             })
         })
         it('Set/Update value null', done=>{
-            profile.update([null]).then(result=>{
+            item.update([null]).then(result=>{
                 done('Should not over here');
             }).catch(e=>{
                 done(!e);
                 console.log('message:',e.message);
             })
         })
-        it('Get without userId', done=>{
-            profile.get().then(result=>{
+        it('Get item without itemId', done=>{
+            item.getItem().then(result=>{
                 done('Should not over here');
             }).catch(e=>{
                 done(!e);
                 console.log('message:',e.message);
             })
         })
-        it('remove without userId', done=>{
-            profile.remove().then(result=>{
+        it('Get dimension without dId', done=>{
+            item.getDimension().then(result=>{
                 done('Should not over here');
             }).catch(e=>{
                 done(!e);
@@ -134,7 +134,15 @@ module.exports=function(orcClient){
             })
         })
         it('remove without itemId', done=>{
-            profile.remove(1).then(result=>{
+            item.removeItemDimension().then(result=>{
+                done('Should not over here');
+            }).catch(e=>{
+                done(!e);
+                console.log('message:',e.message);
+            })
+        })
+        it('remove without dId', done=>{
+            item.removeItemDimension(1).then(result=>{
                 done('Should not over here');
             }).catch(e=>{
                 done(!e);

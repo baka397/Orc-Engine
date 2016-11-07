@@ -1,4 +1,4 @@
-//Orc Middleware Test
+//Orc Middleware Use Test
 'use strict';
 const should = require('should');
 const Orc = require('../../index');
