@@ -1,4 +1,4 @@
-//Orc Middleware Test
+//Orc Profile Module Test
 'use strict';
 const should = require('should');
 module.exports=function(orcClient){
