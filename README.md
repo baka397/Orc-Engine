@@ -7,8 +7,8 @@ Orc Engine
 [![David deps][david-image]][david-url]
 [![node version][node-image]][node-url]
 
-[travis-url]: https://travis-ci.org/baka397/Orc-Engine
 [travis-image]: https://img.shields.io/travis/baka397/Orc-Engine/develop.svg?style=flat-square
+[travis-url]: https://travis-ci.org/baka397/Orc-Engine
 [codecov-image]: https://img.shields.io/codecov/c/github/baka397/Orc-Engine/develop.svg?style=flat-square
 [codecov-url]: https://codecov.io/github/baka397/Orc-Engine?branch=develop
 [david-image]: https://img.shields.io/david/baka397/Orc-Engine.svg?style=flat-square
@@ -17,14 +17,11 @@ Orc Engine
 [node-url]: http://nodejs.org/download/
 
 ##介绍
-Orc Engine是一个基于[redis](http://redis.io/)的"轻量级、高扩展性、快速"推荐引擎. 
+Orc Engine是一个基于[redis](http://redis.io/)的"轻量级、高扩展性、快速"推荐引擎.  
 通过Orc你可以快速创建基于用户行为的内容推荐系统.
 
-#特点
-1. 数据中间件
-2. 自定义模块
-
-##安装条件
+##安装
+请确保以下依赖的版本
 ```
 nodejs >= 4.0.0
 redis >= 2.0.0
@@ -33,6 +30,7 @@ redis >= 2.0.0
 ##测试
 ```
 npm test
+npm run test-cov
 ```
 
 ##文档

@@ -10,6 +10,7 @@ function testConstructor(){
 }
 module.exports=function(orcClient){
     let resultModule;
+    let testModule2;
     let orcTestModule=new Orc({
         name:'orcTestModule'
     });
@@ -56,14 +57,18 @@ module.exports=function(orcClient){
                 })
             })
             it('Emit module message', done=>{
-                orcTestModule.on('info',(info)=>{
+                orcTestModule.once('info',(info)=>{
                     done(info!=='test info');
                 })
                 resultModule.emit('info','test info');
             })
             it('Add with depend module', done=>{
-                let testModule2=createModule(orcTestModule,['testModule'],'testOtherModule',testConstructor);
+                testModule2=createModule(orcTestModule,['testModule'],'testOtherModule',testConstructor);
                 done(testModule2.depends[0]!=='testModule');
+            })
+            it('Get Module', done=>{
+                let testModule=testModule2.getDependModule('testModule');
+                done(testModule.option);
             })
             it('Create same module', done=>{
                 try{
@@ -100,6 +105,20 @@ module.exports=function(orcClient){
                     done()
                     console.log('message:',e.message);
                 }
+            })
+            it('Get Module with empty name', done=>{
+                orcTestModule.once('error',(e)=>{
+                    done(!e);
+                    console.log('message:',e.message);
+                })
+                let testModule=testModule2.getDependModule();
+            })
+            it('Get Module with wrong dependent module name', done=>{
+                orcTestModule.once('error',(e)=>{
+                    done(!e);
+                    console.log('message:',e.message);
+                })
+                let testModule=testModule2.getDependModule('profile');
             })
             it('Clear', done=>{
                 done(clearModules().size!==0);
