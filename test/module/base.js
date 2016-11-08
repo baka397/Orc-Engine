@@ -20,6 +20,9 @@ module.exports=function(orcClient){
                 resultModule=createModule(orcTestModule,[],'testModule',testConstructor);
                 done(!(resultModule.option==='test'&&resultModule.orcClient===orcTestModule&&resultModule.name==='testModule'&&resultModule.depends.length===0));
             })
+            it('Get config', done=>{
+                done(resultModule.getConfig().name!=='orcTestModule');
+            })
             it('Get redis key', done=>{
                 done(resultModule.getRedisKey('test')!=='orcTestModule:testModule:test');
             })
