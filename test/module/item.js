@@ -33,6 +33,11 @@ module.exports=function(orcClient){
                 itemId:1,
                 dId:3,
                 point:4
+            },
+            {
+                itemId:2,
+                dId:3,
+                point:1
             }
             ]).then(result=>{
                 done();
@@ -73,6 +78,27 @@ module.exports=function(orcClient){
                 done(result.length!==0);
             }).catch(e=>{
                 done(e);
+            })
+        })
+        it('Clear item', done=>{
+            item.clearItem(1).then(result=>{
+                //del item key, del 2 dimension key member
+                done(result.length!==3);
+            }).catch(e=>{
+                done(!e);
+            })
+        })
+        it('Clear item confirm', done=>{
+            //Push promise task
+            let promiseList = [];
+            promiseList.push(item.getItem(1)); //get item 1, will empty
+            promiseList.push(item.getItem(2)); //get item 2, will 3,1
+            promiseList.push(item.getDimension(2)); //get dimension 2, will empty
+            promiseList.push(item.getDimension(3)); //get dimension 3, will 2,1
+            Promise.all(promiseList).then(results=>{
+                done(!(results[0].length===0&&parseInt(results[1][0])===3&&parseInt(results[1][1])===1&&results[2].length===0&&parseInt(results[3][0])===2&&parseInt(results[3][1])===1));
+            }).catch(e=>{
+                done(!e);
             })
         })
         it('Set/Update wrong type', done=>{
@@ -143,6 +169,22 @@ module.exports=function(orcClient){
         })
         it('remove without dId', done=>{
             item.removeItemDimension(1).then(result=>{
+                done('Should not over here');
+            }).catch(e=>{
+                done(!e);
+                console.log('message:',e.message);
+            })
+        })
+        it('Clear item empty', done=>{
+            item.clearItem().then(result=>{
+                done('Should not over here');
+            }).catch(e=>{
+                done(!e);
+                console.log('message:',e.message);
+            })
+        })
+        it('Clear item not exist', done=>{
+            item.clearItem(1).then(result=>{
                 done('Should not over here');
             }).catch(e=>{
                 done(!e);
