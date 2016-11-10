@@ -6,7 +6,12 @@ const Orc = require('../index');
 const middlewareTest = require('./middleware/');
 const moduleTest = require('./module/');
 
-let orcClient=new Orc();
+let orcClient=new Orc({
+    itemDimensionTypeWeight:{ //Dimension Type Weight
+        'test': 0.8,
+        'test2': 1
+    }
+});
 describe('Orc create', ()=>{
     describe('Redis client Test', ()=>{
         it('Create', done=>{

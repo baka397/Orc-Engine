@@ -93,8 +93,7 @@ module.exports=function(orcClient){
         })
         it('Clear item', done=>{
             item.clearItem('test',1).then(result=>{
-                //del item key, del 2 dimension key member
-                done(result.length!==3);
+                done();
             }).catch(e=>{
                 done(!e);
             })

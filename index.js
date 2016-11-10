@@ -31,6 +31,7 @@ Orc.prototype._init=function(config){
         ranking:[]
     }
     this._module={};
+    this.orcTool=tool; //get default orc tool function
 }
 //Apply methods
 tool.applyMethods(Orc,middlewareFuncs,moduleFuncs);
