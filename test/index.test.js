@@ -6,12 +6,7 @@ const Orc = require('../index');
 const middlewareTest = require('./middleware/');
 const moduleTest = require('./module/');
 
-let orcClient=new Orc({
-    itemDimensionTypeWeight:{ //Dimension Type Weight
-        'test': 0.8,
-        'test2': 1
-    }
-});
+let orcClient=new Orc();
 describe('Orc create', ()=>{
     describe('Redis client Test', ()=>{
         it('Create', done=>{
@@ -46,6 +41,23 @@ describe('Orc create', ()=>{
             orcClient.config.should.have.property('name', 'orc');
         })
     })
+    describe('Config Ranking', ()=>{
+        it('Name', done=>{
+            try{
+                new Orc({
+                    name:'testRanking',
+                    dimensionWeight:[{
+                        'name':'test',
+                        'weight':1
+                    }]
+                })
+                done();
+            }catch(e){
+                done(e);
+            }
+        })
+    })
+    //Error Test
     describe('Config Error', ()=>{
         it('Name', done=>{
             try{
@@ -54,7 +66,93 @@ describe('Orc create', ()=>{
                 })
                 done('Should not over here');
             }catch(e){
-                done()
+                done();
+                console.log(e.message);
+            }
+        })
+    })
+    describe('Config Ranking Error: dimensionWeight wrong type', ()=>{
+        it('Name', done=>{
+            try{
+                new Orc({
+                    name:'testRanking1',
+                    dimensionWeight:'test'
+                })
+                done('Should not over here');
+            }catch(e){
+                done();
+                console.log(e.message);
+            }
+        })
+    })
+    describe('Config Ranking Error: dimensionWeight wrong value', ()=>{
+        it('Name', done=>{
+            try{
+                new Orc({
+                    name:'testRanking2',
+                    dimensionWeight:[{
+                        'name':'test test',
+                        'point':'test'
+                    }]
+                })
+                done('Should not over here');
+            }catch(e){
+                done();
+                console.log(e.message);
+            }
+        })
+    })
+    describe('Config Ranking Error: rankingDimensionCache', ()=>{
+        it('Name', done=>{
+            try{
+                new Orc({
+                    name:'testRanking3',
+                    dimensionWeight:[{
+                        'name':'test',
+                        'weight':1
+                    }],
+                    rankingDimensionCache:-1
+                })
+                done('Should not over here');
+            }catch(e){
+                done();
+                console.log(e.message);
+            }
+        })
+    })
+    describe('Config Ranking Error: rankingItemCache', ()=>{
+        it('Name', done=>{
+            try{
+                new Orc({
+                    name:'testRanking4',
+                    dimensionWeight:[{
+                        'name':'test',
+                        'weight':1
+                    }],
+                    rankingItemCache:-1
+                })
+                done('Should not over here');
+            }catch(e){
+                done();
+                console.log(e.message);
+            }
+        })
+    })
+    describe('Config Ranking Error: rankingPointCache', ()=>{
+        it('Name', done=>{
+            try{
+                new Orc({
+                    name:'testRanking5',
+                    dimensionWeight:[{
+                        'name':'test',
+                        'weight':1
+                    }],
+                    rankingPointCache:-1
+                })
+                done('Should not over here');
+            }catch(e){
+                done();
+                console.log(e.message);
             }
         })
     })

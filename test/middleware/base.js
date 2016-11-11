@@ -18,13 +18,13 @@ module.exports=function(orcClient){
                 //Sync function
                 middlewares.push(function(input,next){
                     input.name='test name';
-                    next();
+                    next(null,input);
                 });
                 //Async function
                 middlewares.push(function(input,next){
                     setTimeout(function(){
                         input.age='test age';
-                        next();
+                        next(null,input);
                     },100);
                 });
                 middlewareTask({'middleware':'test string'},middlewares).then(output=>{
@@ -33,6 +33,7 @@ module.exports=function(orcClient){
                     done(err);
                 })
             })
+            //Error test
             it('Create with error function',done=>{
                 let middlewares=[];
                 //Error function

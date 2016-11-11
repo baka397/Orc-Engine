@@ -3,7 +3,6 @@
 const tool = require('../tool');
 const should = require('should');
 const Orc = require('../../index');
-const clearModules=require('../../lib/module/base').clear; //Middleware Task
 function testConstructor(){
     this.option='test';
 }
@@ -20,6 +19,7 @@ module.exports=function(orcClient){
             let testModule=orcTestModule2.getTestModule;
             done(!(testModule.option==='test'&&testModule.fullName==='orcTestModule2:testModule'&&testModule.orcClient===orcTestModule2));
         })
+        //Error test
         it('Register with Wrong Module Name', done=>{
             orcTestModule2.once('error',(e)=>{
                 done(!e);

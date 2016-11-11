@@ -75,6 +75,7 @@ module.exports=function(orcClient){
                 done(e);
             })
         })
+        //Error test
         it('Set/Update wrong type', done=>{
             profile.update(
             {

@@ -49,6 +49,12 @@ module.exports=function(orcClient){
                 itemId:2,
                 dId:3,
                 point:1
+            },
+            {
+                type:'test2',
+                itemId:3,
+                dId:1,
+                point:2
             }
             ]).then(result=>{
                 done();
@@ -111,6 +117,7 @@ module.exports=function(orcClient){
                 done(!e);
             })
         })
+        //Error test
         it('Set/Update wrong type', done=>{
             item.update(
             {
@@ -122,7 +129,7 @@ module.exports=function(orcClient){
             ).then(result=>{
                 done('Should not over here');
             }).catch(e=>{
-                done(!e);
+                done();
                 console.log('message:',e.message);
             })
         })

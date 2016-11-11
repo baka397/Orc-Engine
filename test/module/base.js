@@ -4,7 +4,6 @@ const tool = require('../tool');
 const should = require('should');
 const Orc = require('../../index');
 const createModule=require('../../lib/module/base').create; //Middleware Task
-const clearModules=require('../../lib/module/base').clear; //Middleware Task
 function testConstructor(){
     this.option='test';
 }
@@ -36,7 +35,7 @@ module.exports=function(orcClient){
             it('Use Middleware', done=>{
                 let middlewareFunc=function(data,next){
                     data.test=1;
-                    next();
+                    next(null,data);
                 }
                 resultModule.use(middlewareFunc);
                 let middlewarePromise=resultModule.getMiddlewares({'test':'test'});
@@ -49,7 +48,7 @@ module.exports=function(orcClient){
             it('Use Middleware without default name', done=>{
                 let middlewareFunc2=function(data,next){
                     data.test=2;
-                    next();
+                    next(null,data);
                 }
                 resultModule.use('testMiddleware',middlewareFunc2);
                 let middlewarePromise=resultModule.getMiddlewares('testMiddleware',{'test':'test'});
@@ -82,6 +81,7 @@ module.exports=function(orcClient){
                     console.log('message:',e.message);
                 }
             })
+            //Error test
             it('Wrong module name', done=>{
                 try{
                     let result=createModule(orcTestModule,[],'test Module',testConstructor);
@@ -122,9 +122,6 @@ module.exports=function(orcClient){
                     console.log('message:',e.message);
                 })
                 let testModule=testModule2.getDependModule('profile');
-            })
-            it('Clear', done=>{
-                done(clearModules().size!==0);
             })
         })
     })

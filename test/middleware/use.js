@@ -20,6 +20,7 @@ module.exports=function(orcClient){
                 orcTestMiddleware.use('testRec',testFunc);//Test Rec
                 done(!(orcTestMiddleware._middleware.profile[1]===testFunc&&orcTestMiddleware._middleware.ranking[0]===testFunc&&orcTestMiddleware._middleware.testRec[0]===testFunc))
             })
+            //Error test
             it('Use wrong middleware name',done=>{
                 let testFunc2=function(datas,next){
                     datas.test='2';
