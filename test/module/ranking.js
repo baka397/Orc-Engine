@@ -259,6 +259,15 @@ module.exports=function(orcClient){
                 done(e);
             })
         })
+        it('Get Item Point Expire seconds', done=>{
+            let redisClient = ranking.getRedisClient();
+            let redisKey = ranking.getRedisKey('1:itemPoint:4');
+            redisClient.ttl(redisKey).then(result=>{
+                done(parseInt(result)<(expireDay*dayTime-2));
+            }).catch(e=>{
+                done(e);
+            })
+        })
         //Error test
         it('Get Dimension Cache with wrong userId', done=>{
             ranking.getDimensionCache(2).then(result=>{
