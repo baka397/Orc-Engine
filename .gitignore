@@ -4,4 +4,4 @@
 #Dependency directory
 node_modules/
 coverage/
-docs/*.xlsx
+docs/

@@ -71,8 +71,8 @@ describe('Orc create', ()=>{
             }
         })
     })
-    describe('Config Ranking Error: dimensionWeight wrong type', ()=>{
-        it('Name', done=>{
+    describe('Config Ranking Error', ()=>{
+        it('dimensionWeight wrong type', done=>{
             try{
                 new Orc({
                     name:'testRanking1',
@@ -84,9 +84,7 @@ describe('Orc create', ()=>{
                 console.log(e.message);
             }
         })
-    })
-    describe('Config Ranking Error: dimensionWeight wrong value', ()=>{
-        it('Name', done=>{
+        it('dimensionWeight wrong value', done=>{
             try{
                 new Orc({
                     name:'testRanking2',
@@ -101,9 +99,7 @@ describe('Orc create', ()=>{
                 console.log(e.message);
             }
         })
-    })
-    describe('Config Ranking Error: rankingDimensionCache', ()=>{
-        it('Name', done=>{
+        it('rankingDimensionCache', done=>{
             try{
                 new Orc({
                     name:'testRanking3',
@@ -119,9 +115,7 @@ describe('Orc create', ()=>{
                 console.log(e.message);
             }
         })
-    })
-    describe('Config Ranking Error: rankingItemCache', ()=>{
-        it('Name', done=>{
+        it('rankingItemCache', done=>{
             try{
                 new Orc({
                     name:'testRanking4',
@@ -137,9 +131,7 @@ describe('Orc create', ()=>{
                 console.log(e.message);
             }
         })
-    })
-    describe('Config Ranking Error: rankingPointCache', ()=>{
-        it('Name', done=>{
+        it('rankingPointCache', done=>{
             try{
                 new Orc({
                     name:'testRanking5',
@@ -148,6 +140,87 @@ describe('Orc create', ()=>{
                         'weight':1
                     }],
                     rankingPointCache:-1
+                })
+                done('Should not over here');
+            }catch(e){
+                done();
+                console.log(e.message);
+            }
+        })
+        it('rankingAvgPointCardinal < 0', done=>{
+            try{
+                new Orc({
+                    name:'testRanking6',
+                    dimensionWeight:[{
+                        'name':'test',
+                        'weight':1
+                    }],
+                    rankingAvgPointCardinal:-1
+                })
+                done('Should not over here');
+            }catch(e){
+                done();
+                console.log(e.message);
+            }
+        })
+        it('rankingAvgPointCardinal > 1', done=>{
+            try{
+                new Orc({
+                    name:'testRanking7',
+                    dimensionWeight:[{
+                        'name':'test',
+                        'weight':1
+                    }],
+                    rankingAvgPointCardinal:1
+                })
+                done('Should not over here');
+            }catch(e){
+                done();
+                console.log(e.message);
+            }
+        })
+        it('rankingAvgPointMinNumber', done=>{
+            try{
+                new Orc({
+                    name:'testRanking8',
+                    dimensionWeight:[{
+                        'name':'test',
+                        'weight':1
+                    }],
+                    rankingAvgPointMinNumber:-1
+                })
+                done('Should not over here');
+            }catch(e){
+                done();
+                console.log(e.message);
+            }
+        })
+        it('rankingAvgPointMaxNumber', done=>{
+            try{
+                new Orc({
+                    name:'testRanking9',
+                    dimensionWeight:[{
+                        'name':'test',
+                        'weight':1
+                    }],
+                    rankingAvgPointMaxNumber:10
+                })
+                done('Should not over here');
+            }catch(e){
+                done();
+                console.log(e.message);
+            }
+        })
+        it('rankingAvgPointMaxNumber < rankingAvgPointMinNumber', done=>{
+            try{
+                new Orc({
+                    name:'testRanking10',
+                    dimensionWeight:[{
+                        'name':'test',
+                        'weight':1
+                    }],
+                    rankingAvgPointMinNumber:12,
+                    rankingAvgPointMaxNumber:11
                 })
                 done('Should not over here');
             }catch(e){
