@@ -247,14 +247,14 @@ module.exports=function(orcClient){
         })
         it('Get Item Point', done=>{
             ranking.getItemPoint(1,4).then(result=>{
-                done(result!==0.5832);
+                done(result!==0.2916);
             }).catch(e=>{
                 done(e);
             })
         })
         it('Get Item Point again', done=>{
             ranking.getItemPoint(1,4).then(result=>{
-                done(result!==0.5832);
+                done(result!==0.2916);
             }).catch(e=>{
                 done(e);
             })
