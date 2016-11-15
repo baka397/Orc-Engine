@@ -34,7 +34,7 @@ npm run test-cov
 ```
 
 ##文档
-访问[orce.io](https://orce.io)获取最新文档.
+访问[orce.io](https://orce.io)获取最新文档.(暂未开放)
 
 ##Changelog
 版本更新说明请关注[releases](https://github.com/baka397/Orc-Engine/releases)
