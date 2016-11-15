@@ -4,7 +4,8 @@
   "description": "Light-weight recommended engine for Node.js - backed by Redis",
   "main": "index.js",
   "scripts": {
-    "test": "make test"
+    "test": "node ./node_modules/mocha/bin/mocha --timeout 200000",
+    "test-cov": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha"
   },
   "repository": {
     "type": "git",
@@ -15,16 +16,24 @@
     "recommend"
   ],
   "author": "bakajinsei",
-  "license": "ISC",
+  "license": {
+    "type" : "MIT",
+    "url" : "https://opensource.org/licenses/MIT"
+  },
   "bugs": {
     "url": "https://github.com/baka397/Orc-Engine/issues"
   },
   "homepage": "https://orce.io",
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "dependencies": {
     "ioredis": "^2.4.0"
   },
   "devDependencies": {
+    "istanbul": "^0.4.5",
     "mocha": "^3.1.2",
-    "nock": "^9.0.2"
+    "nock": "^9.0.2",
+    "should": "^11.1.1"
   }
 }

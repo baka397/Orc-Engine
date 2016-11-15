@@ -11,4 +11,7 @@ node_js:
 services:
   - redis-server
 
-script: npm test
+script: npm run test-cov
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

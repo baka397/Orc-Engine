@@ -2,4 +2,6 @@
 *.log
 
 #Dependency directory
-node_modules
+node_modules/
+coverage/
+docs/
