@@ -6,6 +6,7 @@ const tool = require('./lib/common/tool');
 const redis = require('./lib/common/redis');
 const middlewareFuncs = require('./lib/middleware/');
 const moduleFuncs = require('./lib/module/');
+//Create Orc Constructor
 function Orc(config){
     config=config||{};
     EventEmitter.call(this);
@@ -22,17 +23,17 @@ Orc.prototype._init=function(config){
         throw new Error('The config.name must be 3-20 words/number');
     }
     this.config=Object.assign({},baseConfig,config);
-    if(config.redis) this.config.redis=Object.assign({},config.redis)
+    if(config.redis) this.config.redis=Object.assign({},config.redis);
     //Init redis client
     this.redis=redis(this.config.redis);
     //Add middleware function list
     this._middleware={
         profile:[],
         ranking:[]
-    }
+    };
     this._module={};
     this.orcTools=tool; //get default orc tool function
-}
+};
 //Apply methods
 tool.applyMethods(Orc,middlewareFuncs,moduleFuncs);
 module.exports = Orc;
