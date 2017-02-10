@@ -115,119 +115,6 @@ describe('Orc create', ()=>{
                 console.log(e.message);
             }
         })
-        it('rankingItemCache', done=>{
-            try{
-                new Orc({
-                    name:'testRanking4',
-                    dimensionWeight:[{
-                        'name':'test',
-                        'weight':1
-                    }],
-                    rankingItemCache:-1
-                })
-                done('Should not over here');
-            }catch(e){
-                done();
-                console.log(e.message);
-            }
-        })
-        it('rankingPointCache', done=>{
-            try{
-                new Orc({
-                    name:'testRanking5',
-                    dimensionWeight:[{
-                        'name':'test',
-                        'weight':1
-                    }],
-                    rankingPointCache:-1
-                })
-                done('Should not over here');
-            }catch(e){
-                done();
-                console.log(e.message);
-            }
-        })
-        it('rankingAvgPointCardinal < 0', done=>{
-            try{
-                new Orc({
-                    name:'testRanking6',
-                    dimensionWeight:[{
-                        'name':'test',
-                        'weight':1
-                    }],
-                    rankingAvgPointCardinal:-1
-                })
-                done('Should not over here');
-            }catch(e){
-                done();
-                console.log(e.message);
-            }
-        })
-        it('rankingAvgPointCardinal > 1', done=>{
-            try{
-                new Orc({
-                    name:'testRanking7',
-                    dimensionWeight:[{
-                        'name':'test',
-                        'weight':1
-                    }],
-                    rankingAvgPointCardinal:1
-                })
-                done('Should not over here');
-            }catch(e){
-                done();
-                console.log(e.message);
-            }
-        })
-        it('rankingAvgPointMinNumber', done=>{
-            try{
-                new Orc({
-                    name:'testRanking8',
-                    dimensionWeight:[{
-                        'name':'test',
-                        'weight':1
-                    }],
-                    rankingAvgPointMinNumber:-1
-                })
-                done('Should not over here');
-            }catch(e){
-                done();
-                console.log(e.message);
-            }
-        })
-        it('rankingAvgPointMaxNumber', done=>{
-            try{
-                new Orc({
-                    name:'testRanking9',
-                    dimensionWeight:[{
-                        'name':'test',
-                        'weight':1
-                    }],
-                    rankingAvgPointMaxNumber:10
-                })
-                done('Should not over here');
-            }catch(e){
-                done();
-                console.log(e.message);
-            }
-        })
-        it('rankingAvgPointMaxNumber < rankingAvgPointMinNumber', done=>{
-            try{
-                new Orc({
-                    name:'testRanking10',
-                    dimensionWeight:[{
-                        'name':'test',
-                        'weight':1
-                    }],
-                    rankingAvgPointMinNumber:12,
-                    rankingAvgPointMaxNumber:11
-                })
-                done('Should not over here');
-            }catch(e){
-                done();
-                console.log(e.message);
-            }
-        })
     })
 })
 
@@ -236,6 +123,22 @@ moduleTest(orcClient);
 
 describe('Orc test data clear', ()=>{
     it('Flush',()=>{
-        return orcClient.redis.flushdb();
+        let redisClient = orcClient.redis;
+        let redisPipeline=redisClient.pipeline();
+        redisPipeline.keys('Orc:*');
+        redisPipeline.keys('orc:*');
+        redisPipeline.keys('orctestProfile:*');
+        redisPipeline.exec()
+        .then(function(data){
+            let keys=[];
+            data.forEach(function(curKeys){
+                keys=keys.concat(curKeys[1]);
+            })
+            return redisClient.del.apply(redisClient,keys);
+        }).then(function(delnum){
+            done();
+        }).catch(function(err){
+            done(err);
+        })
     })
 })
