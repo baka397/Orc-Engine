@@ -197,6 +197,22 @@ module.exports=function(orcClient){
                 done(e);
             })
         })
+        it('Get Dimension Cache with top', done=>{
+            ranking.getDimensionCache(1,1).then(result=>{
+                let tagResult=result.tag;
+                done(!(tagResult.length===1&&parseInt(tagResult[0].id)===1&&parseFloat(tagResult[0].point)===10.4989));
+            }).catch(e=>{
+                done(e);
+            })
+        })
+        it('Get Dimension Cache with bottom', done=>{
+            ranking.getDimensionCache(1,-1).then(result=>{
+                let tagResult=result.tag;
+                done(!(tagResult.length===1&&parseInt(tagResult[0].id)===3&&parseFloat(tagResult[0].point)===3.4997));
+            }).catch(e=>{
+                done(e);
+            })
+        })
         it('Get Dimension Cache Expire seconds', done=>{
             let redisClient = ranking.getRedisClient();
             let redisKey = ranking.getRedisKey('1:dimension:tag');
