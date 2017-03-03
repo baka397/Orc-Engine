@@ -36,6 +36,28 @@ npm run test-cov
 ##文档
 访问[orce.io](https://orce.io)获取最新文档.(暂未开放)
 
+##Todo list
+- High
+    * 内置模块 - (算法测试项目:[ACGO-个性化的动漫推荐网站](https://www.acgo.club/client/))
+        * 针对稀疏数据的`ItemResult`模块
+        * 针对稀疏数据的`ProfileResult`模块
+    * `Strategy`策略层编写:
+        * 对模块调用的核心方法实现与封装
+        * 测试集自动拆分与效果报告
+    * 内置策略
+- Middle
+    * ORC开发文档 - 隶属[Orce.io官网](https://github.com/baka397/Orc-engine-website)
+        * Getting Started
+        * API
+        * Middleware使用指南
+        * Module开发指南
+        * Strategy开发指南
+        * Demo Sites
+- Low
+    * [Orce.io官网](https://github.com/baka397/Orc-engine-website)
+    * [Orce.io Plugin List](https://github.com/baka397/Orc-engine-website)
+    * Redis核心组件对Redis集群的改造
+
 ##Changelog
 版本更新说明请关注[releases](https://github.com/baka397/Orc-Engine/releases)
 
