@@ -17,7 +17,7 @@ Orc Engine
 [node-image]: https://img.shields.io/badge/node.js-%3E=_4-green.svg?style=flat-square
 [node-url]: http://nodejs.org/download/
 
-介绍(Introduce)
+介绍(Introduction)
 ----------
 Orc Engine是一个基于[redis](http://redis.io/)的"轻量级、高扩展性"推荐引擎.  
 通过Orc你可以快速创建基于用户行为的内容推荐系统.  
