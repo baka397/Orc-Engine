@@ -6,6 +6,7 @@ const tool = require('./lib/common/tool');
 const redis = require('./lib/common/redis');
 const middlewareFuncs = require('./lib/middleware/');
 const moduleFuncs = require('./lib/module/');
+const strategyFuncs = require('./lib/strategy/');
 //Create Orc Constructor
 function Orc(config){
     config=config||{};
@@ -35,5 +36,5 @@ Orc.prototype._init=function(config){
     this.orcTools=tool; //get default orc tool function
 };
 //Apply methods
-tool.applyMethods(Orc,middlewareFuncs,moduleFuncs);
+tool.applyMethods(Orc,middlewareFuncs,moduleFuncs,strategyFuncs);
 module.exports = Orc;

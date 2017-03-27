@@ -5,6 +5,7 @@ const Orc = require('../index');
 //Load test case
 const middlewareTest = require('./middleware/');
 const moduleTest = require('./module/');
+const strategyTest = require('./strategy/');
 
 let orcClient=new Orc();
 describe('Orc create', ()=>{
@@ -120,6 +121,7 @@ describe('Orc create', ()=>{
 
 middlewareTest(orcClient);
 moduleTest(orcClient);
+strategyTest(orcClient);
 
 describe('Orc test data clear', ()=>{
     it('Flush',()=>{

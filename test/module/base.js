@@ -3,7 +3,7 @@
 const tool = require('../tool');
 const should = require('should');
 const Orc = require('../../index');
-const createModule=require('../../lib/module/base').create; //Middleware Task
+const createModule=require('../../lib/module/base').create; //Module Task
 function testConstructor(){
     this.option='test';
 }

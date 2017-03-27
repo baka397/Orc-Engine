@@ -1,4 +1,4 @@
-//Orc Middleware register Test
+//Orc Module register Test
 'use strict';
 const tool = require('../tool');
 const should = require('should');
