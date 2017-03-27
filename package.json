@@ -17,8 +17,8 @@
   ],
   "author": "bakajinsei",
   "license": {
-    "type" : "MIT",
-    "url" : "https://opensource.org/licenses/MIT"
+    "type": "MIT",
+    "url": "https://opensource.org/licenses/MIT"
   },
   "bugs": {
     "url": "https://github.com/baka397/Orc-Engine/issues"
@@ -31,9 +31,11 @@
     "ioredis": "^2.4.0"
   },
   "devDependencies": {
+    "inquirer": "^3.0.6",
     "istanbul": "^0.4.5",
     "mocha": "^3.1.2",
     "nock": "^9.0.2",
+    "node-xlsx": "^0.7.4",
     "should": "^11.1.1"
   }
 }
