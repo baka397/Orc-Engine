@@ -54,7 +54,7 @@ Visit [orce.io](https://orce.io) to get more info.(TBD)
 Todo list
 ----------
 - High
-    * 内置模块 - (算法测试项目:[ACGO-个性化的动漫推荐网站](https://www.acgo.club/client/))
+    * 内置模块
         * 针对稀疏数据的`ItemResult`模块
         * 针对稀疏数据的`ProfileResult`模块
     * `Strategy`策略层编写:
@@ -62,7 +62,7 @@ Todo list
         * 测试集自动拆分与效果报告
     * 内置策略
 - Middle
-    * ORC开发文档 - 隶属[Orce.io官网](https://github.com/baka397/Orc-engine-website)
+    * ORC开发文档
         * Getting Started
         * API
         * Middleware使用指南
